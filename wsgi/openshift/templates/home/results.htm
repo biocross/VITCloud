@@ -1,0 +1,40 @@
+{% include "home/header.htm" %}
+
+{% if paragraph %}
+
+<p class="generic"> Here's what's been shared lately. </p>
+
+{% endif %}
+
+{% if results %}
+<div class="results">
+	<h2 style="border-bottom: none">Found {{no}} Files </h2>
+	<div> </div>
+	<h3><span class="s_t">size</span>  |  <span class="u_t">block</span>  |  <span class="d_t">room</span></h3>
+{% if not paragraph %}
+
+{% endif %}
+{% for result in results %}
+
+	<dl>
+		<dt>
+			<a href="http://vitcloud-biocross.rhcloud.com/file?q={{result.name}}">{{ result.name }}</a>
+		</dt>
+		<dd>
+			<span class="s">{{result.size}} MB</span>
+			<span class="u">{{result.block}}</span>
+			<span class="d">{{result.room}}</span>
+			
+		</dd>	
+	</dl>
+
+ {% endfor %}
+ </div>
+
+{% else %}
+
+<p class="generic"> Your search returned <strong> NO RESULTS </strong> </p>
+
+{% endif %}
+
+{% include "home/footer.htm" %}

@@ -1,0 +1,28 @@
+{% include "home/header.htm" %}
+
+
+
+
+<div class="info"> This file available in the following room(s).</div>
+<div class="download">
+
+<h2> <span> {{filen}}</span></h2>
+{% for result in results %}
+<dl> 
+	<dt> <a href="#" class="singlefile"> {{result.name}} </a>
+	</dt>	
+	<dd><span><span class="s_t">{{result.block}}</span> | <span class="u_t">{{result.room}}</span> | Added on: <span class="d_t">{{result.date}}</span></span></dd>
+</dl>
+{% endfor %}
+
+</div>
+
+
+
+
+
+<br/><br/>
+<p class="generic" style="font-size: 13px;" id="stats"> <a href="/addguide"> Share your awesome stuff. Add your files. </a> </p>
+
+
+{% include "home/footer.htm" %}

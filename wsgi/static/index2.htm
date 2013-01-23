@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>VITCloud</title>
+
+<link rel="stylesheet" href="./index2_files/style.17.css" type="text/css">
+<script type="text/javascript" src="./index2_files/jquery.min.js"></script>
+<script type="text/javascript" src="./index2_files/script.19.js"></script>
+
+<style>
+
+.top{
+	border-radius: 0px;
+	
+}
+#vitc{
+	color: white;
+}
+
+</style>
+
+</head>
+<body>
+<div class="top">
+<h1><a href="./index2_files/index2.htm" title="VIT Cloud Search" id="vitc">VITCloud</a></h1>
+<ul>
+<li><a href="http://torrentz.in/search" title="Torrent Search">Search</a></li>
+<li><a href="http://torrentz.in/i" title="Personal Torrent Search">How it Works?</a></li>
+<li><a href="http://torrentz.in/profile" title="My Profile">Top Sharers</a></li>
+<li><a href="http://torrentz.in/help" title="Get Help">Get the App!</a></li>
+</ul>
+</div>
+
+<form action="http://torrentz.in/search" method="get" class="search">
+<fieldset>
+<div><input type="text" name="f" value="" id="thesearchbox" autocomplete="off">
+	<ul class="autocomplete" style="top: 109.5px; left: 150px; width: 800px;"></ul></div> 
+<div>
+	<input type="submit" value="Search" id="thesearchbutton"></div>
+</fieldset>
+</form>
+
+<p class="generic">VITCloud is the fastest way to find what people around you have downloaded, and get it from them instead of redownloading it all again!</p>
+<p class="generic" style="font-size: 13px;" id="stats">Indexing __ files from __ rooms across __ blocks.</p>
+
+
+<div class="footer">
+
+© 2013 Siddharth Gupta
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#thesearchbox").focus();
+	$("#thesearchbox").autocomplete("/suggestions.php");
+
+});
+</script>
+
+</body><style type="text/css"></style></html>

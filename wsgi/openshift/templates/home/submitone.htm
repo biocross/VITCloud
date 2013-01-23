@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>VITCloud</title>
+
+<link rel="stylesheet" href="http://vitcloud-biocross.rhcloud.com/static/index2_files/style.17.css" type="text/css">
+<script type="text/javascript" src="http://vitcloud-biocross.rhcloud.com/static/index2_files/jquery.min.js"></script>
+<script type="text/javascript" src="http://vitcloud-biocross.rhcloud.com/static/index2_files/script.19.js"></script>
+
+<style>
+
+.top{
+	border-radius: 0px;
+	
+}
+#vitc{
+	color: white;
+}
+
+</style>
+
+</head>
+<body>
+<div class="top">
+<h1><a href="http://vitcloud-biocross.rhcloud.com/" title="VITCloud" id="vitc">VITCloud</a></h1>
+<ul>
+<li><a href="http://vitcloud-biocross.rhcloud.com/search" title="What's up right now?">Search</a></li>
+<li><a href="http://vitcloud-biocross.rhcloud.com/howitworks" title="How does it all come together?">How it Works?</a></li>
+<li><a href="http://vitcloud-biocross.rhcloud.com/topsharers" title="See who's been sharin' like crazy!">Top Sharers</a></li>
+<li><a href="http://vitcloud-biocross.rhcloud.com/gettheapp" title="Get the official App and start sharing!">Get the App!</a></li>
+</ul>
+</div>
+
+<form action="" method="get" class="search">
+<fieldset>
+<div><input type="text" name="filename" value="" id="filename" placeholder="Filename" autocomplete="off">
+	<input type="text" name="filesize" value="" id="filesize" placeholder="Filesize" autocomplete="off">
+	<input type="text" name="block" value="" id="block" placeholder="Block" autocomplete="off">
+	<input type="text" name="room" value="" id="room" placeholder="Room No." autocomplete="off">
+	
+	
+	
+	
+</div> 
+<div>
+	<input type="submit" value="Submit File" id="thesearchbutton"></div>
+</fieldset>
+</form>
+<br/><br/>
+<p class="generic">VITCloud is the fastest way to find what people around you have downloaded, and get it from them instead of redownloading it all again!</p>
+<br/><br/>
+<p class="generic" style="font-size: 13px;" id="stats">Indexing __ files from __ rooms across __ blocks.</p>
+
+
+<div class="footer">
+
+Copyright 2013<br/>Siddharth Gupta<br/>Saurabh Joshi<br/><br/>dev.alpha.01<br/>12.12.2012
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#thesearchbox").focus();
+	//$("#thesearchbox").autocomplete("");
+
+});
+</script>
+
+</body>
+</html>
