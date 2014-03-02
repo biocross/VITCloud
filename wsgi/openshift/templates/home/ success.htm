@@ -1,0 +1,19 @@
+{% include "home/header.htm" %}
+</div>
+<p class="generic"> Currently Stored files: </p>
+<p class="generic">
+<ul>
+{% for item in results %}
+<li>{{ item.name }}</li>
+{% endfor %}
+</ul>
+<p class="generic">
+
+
+<br/><br/>
+<p class="generic">VITCloud is the fastest way to find what people around you have downloaded, and get it from them instead of redownloading it all again!</p>
+<br/><br/>
+<p class="generic" style="font-size: 13px;" id="stats">Indexing __ files from __ rooms across __ blocks.</p>
+
+
+{% include "home/footer.htm" %}
