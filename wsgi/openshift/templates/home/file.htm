@@ -2,16 +2,26 @@
 
 
 
+<div class="info" id="indicator"> Trying to load more details... </div>
 
+<div class="info" id="MovieInfo" style="display: none; height: 245px;"> 
+	
+	<img height="243" width="164" src="" id="moviePoster" style="float:left; ">
+	<p style="margin-top: 10px; margin-left: 180px;">
+	<strong> Title: </strong><span id="movieTitle"></span><br /><br />
+	<strong> Release Date: </strong><span id="movieReleaseYear"> </span><br /><br />
+	<strong> Overview: </strong><span id="movieOverview"> </span><br /><br />
+	<a href="" id="movieIMDBLink" target="_blank"> IMDB Link </a>
+	</p>
+</div>
 
-<div class="info" style="display: none;"> </div>
 <p class="generic"> This file available in the following room(s): </p>
 <div class="download">
 
 <h2> <span id="fileTitle"> {{filen}}</span></h2>
 {% for result in results %}
 <dl> 
-	<dt> <a href="#" class="singlefile"> {{result.name}} </a>
+	<dt> <a style="padding-left: 10px;" href="#" class="singlefile"> {{result.name}} </a>
 	</dt>	
 	<dd><span><span class="s_t">{{result.block}}</span> | <span class="u_t">{{result.room}}</span> | Added on: <span class="d_t">{{result.date}}</span></span></dd>
 </dl>
@@ -32,7 +42,8 @@ $(document).ready(function(){
 
 	$.ajax( {url: './apifeed',
 		 beforeSend: function(){ 
-		 		console.log("Calling API");		 		
+		 		console.log("Calling API");	
+		 		//$("#indicator").slideDown();	 		
 		    },
          data: { 
 	         q : $("#fileTitle").text()
@@ -43,11 +54,17 @@ $(document).ready(function(){
         		console.log("Call Complete. Results: ");
 	        	x = JSON.parse(data);
 	        	if(x.status == "valid"){
-	        		$(".info").slideDown();
-	        		$(".info").html('Loading additional details...');
+	        		
+	        		$("#indicator").html('Just a moment...');
 	        		if(x.type == "movie"){
 	        			loadMovieDetails(x.id);
-	        		}
+	        		}	
+	        	}
+	        	else{
+	        		$("#indicator").html("File doesn't seem to be a Movie or TV Show! (beta)");
+	        		setTimeout(function(){ 
+	        			$("#indicator").slideUp(); 
+	        	}, 3000);
 	        		
 	        	}
 
@@ -71,8 +88,37 @@ function loadMovieDetails(id){
         		console.log("Movie Call Complete. Results: ");
         		console.log(data);
 	        	x = data;
-	        	
+	        	$("#indicator").slideUp();
+	        	$("#MovieInfo").slideDown();
+	        	$("#movieTitle").text(x.title);
+	        	$("#movieReleaseYear").text(x.release_date);
+	        	$("#movieOverview").text(x.overview);
+	        	imdblink = "http://www.imdb.com/title/" + x.imdb_id;
+	        	$("#movieIMDBLink").attr("href", imdblink);
 
+
+	        	loadPoster(x.id);
+
+	 }//end of success
+ });
+}
+
+function loadPoster (id) {
+	actUrl = "https://api.themoviedb.org/3/movie/" + id + "/images?api_key=72380f72d2ac93525738d2ef104c283d&"
+	$.ajax( {url: actUrl,
+		 beforeSend: function(){ 
+		 		console.log("Calling Poster API");		 		
+		    },
+         data: { 
+	         
+         } ,
+         type: 'GET',
+         cache: false,
+        success: function(data){ 
+        		x = data;
+        		width = "w" + String(x.posters[0].width);
+        		srcUrl = "http://image.tmdb.org/t/p/" + width + x.posters[1].file_path;
+        		$("#moviePoster").attr("src", srcUrl);
 	 }//end of success
  });
 }
