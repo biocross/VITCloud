@@ -94,9 +94,7 @@ def apiFeed(request):
     if request.method == "GET":
         if("q" in request.GET):
             filename = str(request.GET['q'])
-            print filename
             result = findResult(filename)
-            print result
             return HttpResponse(json.dumps(result))
         else:
             return HttpResponse("Need The Required Parameters to work!")
@@ -110,7 +108,6 @@ def fileDetails(request):
         filen = "NOTFOUND.404"
         for x in results:
             filen = x.name
-        print "\nFile Details are: "
         return render_to_response('home/file.htm', {'results' : results, 'filen': filen })
       
 

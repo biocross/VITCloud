@@ -3,10 +3,12 @@
 
 
 
-<div class="info"> This file available in the following room(s).</div>
+
+<div class="info" style="display: none;"> </div>
+<p class="generic"> This file available in the following room(s): </p>
 <div class="download">
 
-<h2> <span> {{filen}}</span></h2>
+<h2> <span id="fileTitle"> {{filen}}</span></h2>
 {% for result in results %}
 <dl> 
 	<dt> <a href="#" class="singlefile"> {{result.name}} </a>
@@ -23,6 +25,59 @@
 
 <br/><br/>
 <p class="generic" style="font-size: 13px;" id="stats"> <a href="/addguide"> Share your awesome stuff. Add your files. </a> </p>
+
+<script>
+
+$(document).ready(function(){
+
+	$.ajax( {url: './apifeed',
+		 beforeSend: function(){ 
+		 		console.log("Calling API");		 		
+		    },
+         data: { 
+	         q : $("#fileTitle").text()
+         } ,
+         type: 'GET',
+         cache: false,
+        success: function(data){ 
+        		console.log("Call Complete. Results: ");
+	        	x = JSON.parse(data);
+	        	if(x.status == "valid"){
+	        		$(".info").slideDown();
+	        		$(".info").html('Loading additional details...');
+	        		if(x.type == "movie"){
+	        			loadMovieDetails(x.id);
+	        		}
+	        		
+	        	}
+
+	 }//end of success
+ });
+
+});
+
+function loadMovieDetails(id){
+		actUrl = "https://api.themoviedb.org/3/movie/" + id + "?api_key=72380f72d2ac93525738d2ef104c283d&";
+	$.ajax( {url: actUrl,
+		 beforeSend: function(){ 
+		 		console.log("Calling MovieDB API");		 		
+		    },
+         data: { 
+	         
+         } ,
+         type: 'GET',
+         cache: false,
+        success: function(data){ 
+        		console.log("Movie Call Complete. Results: ");
+        		console.log(data);
+	        	x = data;
+	        	
+
+	 }//end of success
+ });
+}
+
+</script>
 
 
 {% include "home/footer.htm" %}
