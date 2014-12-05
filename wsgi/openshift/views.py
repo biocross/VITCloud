@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from openshift.models import File
 from django.views.decorators.csrf import csrf_exempt
+from listingapikeys import findResult
 
 
 #Custom Functions:
@@ -89,6 +90,16 @@ def statistics(request):
     return render_to_response('home/stats.htm', {  'blockNames' : blockNames, 'blockSizes' : blockSizes  })
             
     
+def apiFeed(request):
+    if request.method == "GET":
+        if("q" in request.GET):
+            filename = str(request.GET['q'])
+            print filename
+            result = findResult(filename)
+            print result
+            return HttpResponse(json.dumps(result))
+        else:
+            return HttpResponse("Need The Required Parameters to work!")
     
     
 
@@ -98,7 +109,8 @@ def fileDetails(request):
         results = File.objects.filter(name__icontains=filename)
         filen = "NOTFOUND.404"
         for x in results:
-            filen = x.name         
+            filen = x.name
+        print "\nFile Details are: "
         return render_to_response('home/file.htm', {'results' : results, 'filen': filen })
       
 

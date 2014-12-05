@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^suggestions$', 'openshift.views.suggestions', name='Suggestions'),
     url(r'^file$', 'openshift.views.fileDetails', name='FileDetails'),
     url(r'^stats$', 'openshift.views.statistics', name='PerBlockStatistics'),
+    url(r'^apifeed$', 'openshift.views.apiFeed', name='ApiFeed'),
     
 
 
