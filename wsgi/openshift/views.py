@@ -115,9 +115,9 @@ def submitOne(request):
     error = False
     if 'filename' in request.GET:
         filename = request.GET['filename']
-        filesize = request.GET['filesize']
-        fileblock = request.GET['block']
-        fileroom = request.GET['room']
+        filesize = 100000
+        fileblock = "MN"
+        fileroom = "447"
         if not filename:
             error = True
         else:
@@ -147,7 +147,5 @@ def interface(request):
         return HttpResponse(result)
     else:
         return HttpResponse("<h2>VITCloud</h2> <h4>Desktop App Interface</h4><br/><br/><strong>Current Status:</strong> Listening at /interface...<br/><br/>Copyright 2012-2013<br/>Siddharth Gupta<br/>Saurabh Joshi")
-                
-            
-            
-            
+
+

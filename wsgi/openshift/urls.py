@@ -11,7 +11,6 @@ urlpatterns = patterns('',
     url(r'^howitworks$', 'openshift.views.pageHowitworks', name='Howitworks'),
     url(r'^topsharers$', 'openshift.views.pageTopsharers', name='Topsharers'),
     url(r'^gettheapp$', 'openshift.views.pageGettheapp', name='Gettheapp'),
-    url(r'^submitone$', 'openshift.views.submitOne', name='submitOne'),\
     url(r'^interface$', 'openshift.views.interface', name='Interface'),
     url(r'^suggestions$', 'openshift.views.suggestions', name='Suggestions'),
     url(r'^file$', 'openshift.views.fileDetails', name='FileDetails'),
@@ -22,7 +21,8 @@ urlpatterns = patterns('',
 
     #Uncomment this on Production. SIDS
     url(r'^purge$', 'openshift.views.clean', name='OMG DATABASE CLEANER'),
-                       
+    url(r'^submitone$', 'openshift.views.submitOne', name='submitOne'),
+                   
 
 
     # Uncomment the admin/doc line below to enable admin documentation:

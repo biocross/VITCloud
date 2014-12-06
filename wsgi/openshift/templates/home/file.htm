@@ -7,11 +7,23 @@
 <div class="info" id="MovieInfo" style="display: none; height: 245px;"> 
 	
 	<img height="243" width="164" src="" id="moviePoster" style="float:left; ">
-	<p style="margin-top: 10px; margin-left: 180px;">
-	<strong> Title: </strong><span id="movieTitle"></span><br /><br />
-	<strong> Release Date: </strong><span id="movieReleaseYear"> </span><br /><br />
-	<strong> Overview: </strong><span id="movieOverview"> </span><br /><br />
+	<p style="margin-top: 30px; margin-left: 180px;">
+	<strong> Title: </strong><span id="movieTitle"></span><br />
+	<strong> Release Date: </strong><span id="movieReleaseYear"> </span><br />
+	<strong> Overview: </strong><span id="movieOverview"> </span><br />
 	<a href="" id="movieIMDBLink" target="_blank"> IMDB Link </a>
+	</p>
+</div>
+
+<div class="info" id="TVInfo" style="display: none; height:260px;"> 
+	
+	<img height="243" width="164" src="" id="tvPoster" style="float:left; ">
+	<p style="margin-top: 30px; margin-left: 180px;">
+	<strong> Title: </strong><span id="tvTitle"></span><br />
+	<strong> First Air Date: </strong><span id="firstAirDate"> </span><br />
+	<strong> Overview: </strong><span id="tvOverview"> </span><br />
+	<strong> No. of Seasons: </strong><span id="noOfSeasons"> </span><br />
+	<strong> Created By: </strong><span id="createdBy"> </span><br />
 	</p>
 </div>
 
@@ -58,6 +70,9 @@ $(document).ready(function(){
 	        		$("#indicator").html('Just a moment...');
 	        		if(x.type == "movie"){
 	        			loadMovieDetails(x.id);
+	        		}
+	        		else if(x.type = "tv"){
+	        			loadTVDetails(x.id);
 	        		}	
 	        	}
 	        	else{
@@ -79,9 +94,7 @@ function loadMovieDetails(id){
 		 beforeSend: function(){ 
 		 		console.log("Calling MovieDB API");		 		
 		    },
-         data: { 
-	         
-         } ,
+         data: {} ,
          type: 'GET',
          cache: false,
         success: function(data){ 
@@ -96,7 +109,6 @@ function loadMovieDetails(id){
 	        	imdblink = "http://www.imdb.com/title/" + x.imdb_id;
 	        	$("#movieIMDBLink").attr("href", imdblink);
 
-
 	        	loadPoster(x.id);
 
 	 }//end of success
@@ -109,16 +121,61 @@ function loadPoster (id) {
 		 beforeSend: function(){ 
 		 		console.log("Calling Poster API");		 		
 		    },
-         data: { 
-	         
-         } ,
+         data: {} ,
          type: 'GET',
          cache: false,
         success: function(data){ 
         		x = data;
         		width = "w" + String(x.posters[0].width);
-        		srcUrl = "http://image.tmdb.org/t/p/" + width + x.posters[1].file_path;
+        		srcUrl = "http://image.tmdb.org/t/p/" + width + x.posters[0].file_path;
         		$("#moviePoster").attr("src", srcUrl);
+	 }//end of success
+ });
+}
+
+function loadTVDetails(id){
+		actUrl = "https://api.themoviedb.org/3/tv/" + id + "?api_key=72380f72d2ac93525738d2ef104c283d&";
+	$.ajax( {url: actUrl,
+		 beforeSend: function(){ 
+		 		console.log("Calling TVDB API");		 		
+		    },
+         data: {} ,
+         type: 'GET',
+         cache: false,
+        success: function(data){ 
+        		console.log("TV Call Complete. Results: ");
+        		console.log(data);
+	        	x = data;
+	        	$("#indicator").slideUp();
+	        	$("#TVInfo").slideDown();
+	        	$("#tvTitle").text(x.name);
+	        	$("#firstAirDate").text(x.first_air_date);
+	        	$("#tvOverview").text(x.overview);
+	        	imdblink = "http://www.imdb.com/title/" + x.imdb_id;
+	        	$("#noOfSeasons").text(x.number_of_seasons);
+	        	$("#createdBy").text(x.created_by[0].name);
+
+	        	loadTVPoster(x.id);
+
+	 }//end of success
+ });
+}
+
+function loadTVPoster (id) {
+	actUrl = "https://api.themoviedb.org/3/tv/" + id + "/images?api_key=72380f72d2ac93525738d2ef104c283d&"
+	$.ajax( {url: actUrl,
+		 beforeSend: function(){ 
+		 		console.log("Calling TV Poster API");		 		
+		    },
+         data: {} ,
+         type: 'GET',
+         cache: false,
+        success: function(data){ 
+        		x = data;
+        		width = "w" + String(x.posters[0].height);
+        		srcUrl = "http://image.tmdb.org/t/p/" + width + x.posters[0].file_path;
+        		console.log(srcUrl);
+        		$("#tvPoster").attr("src", srcUrl);
 	 }//end of success
  });
 }

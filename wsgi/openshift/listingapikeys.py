@@ -74,10 +74,11 @@ def findMovieId(name):
 		return {}
 
 def findTvShowDetails(name):
+	print "Entered TVFunction"
 	show = season = episode = None
 	result = {}
 	filename, extension = os.path.splitext(name)
-    	if extension in ['.mkv', '.mp4', '.avi', '.m4v']:
+    	if extension in ['.mkv', '.mp4', '.avi', '.m4v', '.wmv', '.flv']:
 	    	flag = True
 	    	matches = re.findall(r"^((?P<series_name>.+?)[. _-]+)?s(?P<season_num>\d+)[. _-]*e(?P<ep_num>\d+)(([. _-]*e|-)(?P<extra_ep_num>(?!(1080|720)[pi])\d+))*[. _-]*((?P<extra_info>.+?)((?<![. _-])-(?P<release_group>[^-]+))?)?$", filename)
 	    	for match in matches:
@@ -104,6 +105,7 @@ def findTvShowDetails(name):
 	if '-' in show:
 		show = show.replace('-', '').strip()
 	tvSearchUrl = "https://api.themoviedb.org/3/search/tv?api_key=72380f72d2ac93525738d2ef104c283d&"
+	#BUG : show is always empty
 	print "searching for title: " + show
 	url = tvSearchUrl+"query="+quote(show)
 	headers = {"Accept": "application/json"}
@@ -116,6 +118,7 @@ def findTvShowDetails(name):
 		return {}
 
 def findResult(name):
+	print "got: " + name
 	result = findTvShowDetails(name)
 	if result != {}:
 		result.update({'status':'valid', 'type':'tv'})
