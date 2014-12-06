@@ -7,24 +7,24 @@
 <div class="info" id="MovieInfo" style="display: none; height: 245px;"> 
 	
 	<img height="243" width="164" src="" id="moviePoster" style="float:left; ">
-	<p style="margin-top: 30px; margin-left: 180px;">
+	<div style="margin-top: 15px; margin-left: 180px;">
 	<strong> Title: </strong><span id="movieTitle"></span><br />
 	<strong> Release Date: </strong><span id="movieReleaseYear"> </span><br />
-	<strong> Overview: </strong><span id="movieOverview"> </span><br />
+	<strong> Overview: </strong><p id="movieOverview" style="max-height: 85px; overflow: scroll;"> </p><br />
 	<a href="" id="movieIMDBLink" target="_blank"> IMDB Link </a>
-	</p>
+	</div>
 </div>
 
 <div class="info" id="TVInfo" style="display: none; height:260px;"> 
 	
 	<img height="243" width="164" src="" id="tvPoster" style="float:left; ">
-	<p style="margin-top: 30px; margin-left: 180px;">
+	<div style="margin-top: 15px; margin-left: 180px;">
 	<strong> Title: </strong><span id="tvTitle"></span><br />
 	<strong> First Air Date: </strong><span id="firstAirDate"> </span><br />
-	<strong> Overview: </strong><span id="tvOverview"> </span><br />
+	<strong> Overview: </strong><p id="tvOverview" style="max-height: 85px; overflow: scroll;"> </p><br />
 	<strong> No. of Seasons: </strong><span id="noOfSeasons"> </span><br />
 	<strong> Created By: </strong><span id="createdBy"> </span><br />
-	</p>
+	</div>
 </div>
 
 <p class="generic"> This file available in the following room(s): </p>
@@ -83,7 +83,10 @@ $(document).ready(function(){
 	        		
 	        	}
 
-	 }//end of success
+	 },//end of success
+	 error: function(){
+	 	$("#indicator").slideUp();
+	 }
  });
 
 });
