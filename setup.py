@@ -1,13 +1,9 @@
-#!/usr/bin/env python
-
 from setuptools import setup
 
-setup(
-    name='YourAppName',
-    version='1.0',
-    description='OpenShift App',
-    author='Your Name',
-    author_email='example@example.com',
-    url='http://www.python.org/sigs/distutils-sig/',
-    install_requires=['Django>=1.3'],
+setup(name='VITCloud',
+    version='1',
+    description='File Index for VIT Hostels',
+    author='Siddharth Gupt',
+    author_email='sids.1992@gmail.com',
+    url='http://vitcloud-biocross.rhcloud.com',
 )
