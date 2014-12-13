@@ -133,12 +133,14 @@ def submitOne(request):
 @csrf_exempt
 def interface(request):
     if request.method == "POST":
-        data = json.loads(request.raw_post_data)
-        currentBlock = str(data[0]).upper()
-        currentRoom = data[1]
-        no = len(data)
+        data = json.loads(request.body)
+        currentBlock = str(data['Block'])
+        currentRoom = str(data['Room'])
+        currentHostelType = str(data['Hostel'])
+        no = len(data['Files'])
         inserted = 0
-        for x in range(2, no, 2):
+        data=data['Files']
+        for x in range(0, no, 2):
             data[x+1] = int(data[x+1])
             data[x+1] = (data[x+1]/1048576)
             if not repeated(fname = data[x], fsize = str(data[x+1]), fblock=currentBlock, froom = currentRoom):
@@ -146,7 +148,7 @@ def interface(request):
                 temp = File.objects.create(name=data[x], size=str(data[x+1]), block = currentBlock, room = currentRoom, date = now)
                 inserted = (inserted + 1)
         files_inserted = inserted
-        result = "inserted files: \n\n" + str(files_inserted) + str(request.raw_post_data)
+        result = "inserted files: \n\n" + str(files_inserted)
         return HttpResponse(result)
     else:
         return HttpResponse("<h2>VITCloud</h2> <h4>Desktop App Interface</h4><br/><br/><strong>Current Status:</strong> Listening at /interface...<br/><br/>Copyright 2012-2013<br/>Siddharth Gupta<br/>Saurabh Joshi")
