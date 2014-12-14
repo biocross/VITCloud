@@ -1,6 +1,7 @@
 from django.views.generic import View
 from django.http import HttpResponse
 import os, json, datetime
+from django.shortcuts import redirect
 from django.shortcuts import render_to_response
 from vitcloud.models import File
 from django.views.decorators.csrf import csrf_exempt
@@ -51,16 +52,31 @@ def pageGettheapp(request):
 def search(request):
     if request.method == "GET":
         if (request.GET['thesearchbox'] == ""):
-            results = File.objects.all().order_by("-id")
-            no = len(results)
-            paragraph = True
-            return render_to_response('home/results.htm', {'results' : results, 'paragraph' : paragraph,  'no' : no })
+            if ('latest' in request.GET):
+                results = File.objects.all().order_by("-id")
+                no = len(results)
+                paragraph = True
+                return render_to_response('home/results.htm', {'results' : results, 'paragraph' : paragraph,  'no' : no })
+            else:
+                return redirect('/blockwise')
         else:
             filename = str(request.GET['thesearchbox'])
             paragraph = False
             results = File.objects.filter(name__icontains=filename).order_by("-id")
             no = len(results)
             return render_to_response('home/results.htm', {'results' : results, 'paragraph': paragraph, 'no' : no })
+
+def blockwise(request):
+    blockNames = File.objects.values_list('block').distinct()
+    for x in blockNames:
+        print str(x[0])
+    return render_to_response('home/blockwise.htm', {'blocks' : blockNames})
+
+def blockwiseFeeder(request):
+    if request.method == "GET":
+        block = request.GET['block']
+        blockFiles = File.objects.filter(block__iexact=block).order_by("-id")
+        return render_to_response('home/blockwiseFeeder.htm', {'block': block, 'results': blockFiles})
 
 def suggestions(request):
     if request.method == "GET":

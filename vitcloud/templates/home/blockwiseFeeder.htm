@@ -1,14 +1,6 @@
-{% include "home/header.htm" %}
-
-{% if paragraph %}
-
-<p class="generic"> Here's what's been shared lately. You can also <a href="/blockwise"> view the latest sorted by hostel blocks </a></p>
-
-{% endif %}
-
 {% if results %}
 <div class="results">
-	<h2 style="border-bottom: none">Found {{no}} Files </h2>
+	<h2 style="border-bottom: none">{{block}} Block </h2>
 	<div> </div>
 	<h3><span class="s_t">size</span>  |  <span class="u_t">block</span>  |  <span class="d_t">room</span></h3>
 {% if not paragraph %}
@@ -31,10 +23,4 @@
  {% endfor %}
  </div>
 
-{% else %}
-
-<p class="generic"> Your search returned <strong> NO RESULTS </strong> </p>
-
-{% endif %}
-
-{% include "home/footer.htm" %}
+ {% endif %}

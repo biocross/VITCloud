@@ -1,0 +1,51 @@
+{% include "home/header.htm" %}
+
+
+<p class="generic"> Latest files sorted by block. You can also <a href="/search?latest=yes&thesearchbox="> view the latest regardless of the hostel blocks. </a> </p>
+
+
+{% for block in blocks %}
+	{% for x in block %}
+	<div class="resultFrame" block="{{x}}"> </div>
+	{% endfor %}	
+{% endfor %}
+
+
+
+<div class="footer">
+
+Copyright 2014<br/>Siddharth Gupta<br/>Saurabh Joshi<br/><br/>Beta 1<br/>07.12.2014
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#thesearchbox").focus();
+	$("#thesearchbox").autocomplete("suggestions");
+
+	x = $(".resultFrame");
+	for (i=0; i<x.length; i++){
+		urlString = "/blockwiseFeeder?block=" + $(x[i]).attr('block');
+		$(x[i]).load(urlString, function(){
+			console.log("Loaded one");
+		});
+	}
+
+});
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33172500-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>

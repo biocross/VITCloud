@@ -16,6 +16,9 @@ urlpatterns = patterns('',
     url(r'^file$', 'vitcloud.views.fileDetails', name='FileDetails'),
     url(r'^stats$', 'vitcloud.views.statistics', name='PerBlockStatistics'),
     url(r'^apifeed$', 'vitcloud.views.apiFeed', name='ApiFeed'),
+
+    url(r'^blockwise$', 'vitcloud.views.blockwise', name='BlockwiseView'),
+    url(r'^blockwiseFeeder$', 'vitcloud.views.blockwiseFeeder', name='BlockwiseAPI'),
     
 
 
