@@ -38,7 +38,7 @@ Client Apps:
 ===
 
 - Mac: [VITCloud-Client-Mac] 
-- Windows: In Developement
+- Windows: [VITcloud-Client-Windows](https://github.com/aneesh-neelam/VITcloud-Client-Windows)
 - Linux: In Developement
 
 
